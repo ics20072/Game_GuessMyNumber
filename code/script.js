@@ -17,12 +17,12 @@ const displayTheCurrentScore = (score) => document.querySelector(".score").textC
 let score = 20; //Initial the maximum score (we can't have better score than 20)
 let theSecretNumber = generateSecretNumber();
 let highscore = 0;
-let isThisTheNumber = -1; //If -1 then it means that the game is not over yet
+let isGameCompleted = false; //If false then it means that the game is not over yet
 
 document.querySelector(".check").addEventListener("click", function () {
     const inputValue = Number(document.querySelector(".guess").value);
     //Check if the field entered by the user is empty
-    if (isThisTheNumber === -1) {
+    if (!isGameCompleted) {
       if (!inputValue) {
         displayMessage("❌ No number selected!");
         setInputBorderColor("red");
@@ -32,7 +32,7 @@ document.querySelector(".check").addEventListener("click", function () {
         setInputBorderColor("white");
         document.querySelector("body").style.backgroundColor = "#60b347";
         document.querySelector(".number").style.width = "30rem";
-        isThisTheNumber = inputValue; //Changing the value from -1 to another, means that the player will only be able to play the game again.
+        isGameCompleted = true; //Changing the value from false to true, means that the player will only be able to play the game again from the start.
         checkForHighscore();
       } else if (inputValue !== theSecretNumber) {
         if (score > 1) {
@@ -43,7 +43,7 @@ document.querySelector(".check").addEventListener("click", function () {
         } else {
           displayMessage("😥 You lost the game!");
           displayTheCurrentScore(0);
-          isThisTheNumber = 0;
+          isGameCompleted = true; //The game also completed, because the player lose 
         }
       }
     }else {
@@ -62,5 +62,5 @@ document.querySelector(".again").addEventListener("click", function () {
     document.querySelector("body").style.backgroundColor = "#222";
     document.querySelector(".number").style.width = "15rem";
     setInputBorderColor("white");
-    isThisTheNumber = -1; //We have to give him the opportunity again to be able to check his input to play again
+    isGameCompleted = false; //We have to give him the opportunity again to be able to check his input to play again
 }, false);
