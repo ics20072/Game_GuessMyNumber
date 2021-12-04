@@ -7,3 +7,4 @@ Initially, the player enters a number from 1 to 20. If the number he gives match
 If the number he gave is not the same as the hidden one then he continues to enter numbers until he succeeds, following the instructions given to him.
 In each failed attempt to find the number, the score decreases by one(The game starts with a maximum score of 20).
 After repeated failed attempts, if the score becomes 0, then the player loses and the game is over.
+#LIVE: https://ics20072.github.io/Game_GuessMyNumber/code/index.html
