@@ -10,16 +10,18 @@ const checkForHighscore = function () {
 //We generate a random number from 1 to 20
 const generateSecretNumber = () => Math.trunc(Math.random() * 20) + 1;
 //The message that appears on the right and informs about the progress of the game
-const displayMessage = (message) => document.querySelector(".message").textContent = message;
-const setInputBorderColor = (color) => document.querySelector(".guess").style.borderColor = color;
-const displayTheCurrentScore = (score) => document.querySelector(".score").textContent = score;
+const displayMessage = (message) => (document.querySelector(".message").textContent = message);
+const setInputBorderColor = (color) => (document.querySelector(".guess").style.borderColor = color);
+const displayTheCurrentScore = (score) => (document.querySelector(".score").textContent = score);
 
 let score = 20; //Initial the maximum score (we can't have better score than 20)
 let theSecretNumber = generateSecretNumber();
 let highscore = 0;
 let isGameCompleted = false; //If false then it means that the game is not over yet
 
-document.querySelector(".check").addEventListener("click", function () {
+document.querySelector(".check").addEventListener(
+  "click",
+  function () {
     const inputValue = Number(document.querySelector(".guess").value);
     //Check if the field entered by the user is empty
     if (!isGameCompleted) {
@@ -36,23 +38,27 @@ document.querySelector(".check").addEventListener("click", function () {
         checkForHighscore();
       } else if (inputValue !== theSecretNumber) {
         if (score > 1) {
-          displayMessage(inputValue > theSecretNumber ? "📈 Too high!" : "📉 Too low!"); 
+          displayMessage(inputValue > theSecretNumber ? "📈 Too high!" : "📉 Too low!");
           setInputBorderColor("white");
           score--;
           displayTheCurrentScore(score);
         } else {
           displayMessage("😥 You lost the game!");
           displayTheCurrentScore(0);
-          isGameCompleted = true; //The game also completed, because the player lose 
+          isGameCompleted = true; //The game also completed, because the player lose
         }
       }
-    }else {
+    } else {
       alert("Game Over! Click 'Αgain!' to try for a better score");
     }
-}, false);
+  },
+  false
+);
 
 //To reset the Game! We only keep the highscore
-document.querySelector(".again").addEventListener("click", function () {
+document.querySelector(".again").addEventListener(
+  "click",
+  function () {
     score = 20;
     theSecretNumber = generateSecretNumber();
     document.querySelector(".number").textContent = "?";
@@ -63,4 +69,6 @@ document.querySelector(".again").addEventListener("click", function () {
     document.querySelector(".number").style.width = "15rem";
     setInputBorderColor("white");
     isGameCompleted = false; //We have to give him the opportunity again to be able to check his input to play again
-}, false);
+  },
+  false
+);
